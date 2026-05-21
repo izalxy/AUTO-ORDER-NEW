@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Izall Auto Order</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <!-- Ganti file source ini kalau mau pakai video background lain. -->
+    <video class="bg-video" autoplay muted loop playsinline preload="metadata" poster="">
+      <source src="/assets/web-auto-order.mp4" type="video/mp4" />
+    </video>
+    <div class="bg-shade" aria-hidden="true"></div>
+    <button class="sound-toggle" id="soundToggle" type="button" aria-label="Nyalakan suara video">Sound off</button>
+
+    <main class="shell">
+      <section class="hero intro-3d">
+        <div class="intro-copy">
+          <p class="eyebrow">Auto order QRIS</p>
+          <h1>Izall Store</h1>
+          <p class="hero-copy">
+            Tempat order akses BUG MANTAX, NECROBYTE, JASA APK BUG, PPL PROJECT, FLUX PROJECT dengan proses otomatis. Pilih menu, tentukan paket, isi data pembeli,
+            lalu scan QRIS. Setelah pembayaran berhasil, owner langsung menerima notifikasi Telegram.
+          </p>
+          <div class="intro-actions">
+            <button class="primary intro-start" id="startOrder" type="button">Mulai Order</button>
+            <button class="ghost-button" id="openGuide" type="button">Butuh Bantuan</button>
+          </div>
+        </div>
+        <div class="intro-board" aria-label="Alur order">
+          <div class="board-card">
+            <span>01</span>
+            <strong>Pilih Menu</strong>
+            <p>BUG MANTAX, NECROBYTE, JASA APK, PPL PROJECT, FLUX PROJECT</p>
+          </div>
+          <div class="board-card">
+            <span>02</span>
+            <strong>Scan QRIS</strong>
+            <p>QRIS dibuat otomatis sesuai paket.</p>
+          </div>
+          <div class="board-card">
+            <span>03</span>
+            <strong>Owner Notif</strong>
+            <p>Telegram mengirim order paid ke owner.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="workspace" id="orderArea">
+        <div class="section-title">
+          <p class="eyebrow">Pilih produk</p>
+          <h2>Menu Order</h2>
+        </div>
+        <nav class="tabs floating-menu" id="productTabs" aria-label="Menu produk"></nav>
+
+        <div class="layout">
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Pilih paket</p>
+                <h2 id="productTitle">Produk</h2>
+              </div>
+              <p id="productTagline"></p>
+            </div>
+            <div class="plans stage-3d" id="plans"></div>
+          </section>
+
+          <aside class="checkout">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Checkout</p>
+                <h2>Data Pembeli</h2>
+              </div>
+            </div>
+
+            <form id="orderForm">
+              <div class="summary">
+                <span>Produk</span>
+                <strong id="summaryProduct">-</strong>
+                <span>Paket</span>
+                <strong id="summaryPlan">-</strong>
+                <span>Total</span>
+                <strong id="summaryPrice">Rp0</strong>
+              </div>
+
+              <label>
+                Nama
+                <input id="customerName" name="customerName" placeholder="Nama pembeli" autocomplete="name" required />
+              </label>
+              <label>
+                WhatsApp / Telegram
+                <input id="customerContact" name="customerContact" placeholder="08xxx atau @username" required />
+              </label>
+              <label>
+                Catatan
+                <textarea id="note" name="note" rows="3" placeholder="Username, email, atau request lain"></textarea>
+              </label>
+
+              <button class="primary" type="submit">Buat QRIS</button>
+              <p class="form-message" id="formMessage"></p>
+            </form>
+          </aside>
+        </div>
+      </section>
+
+      <dialog id="paymentDialog">
+        <div class="dialog-head">
+          <div>
+            <p class="eyebrow">Pembayaran</p>
+            <h2>Scan QRIS</h2>
+          </div>
+          <button class="icon-button" id="closeDialog" type="button" aria-label="Tutup">x</button>
+        </div>
+        <div class="payment-grid">
+          <img id="qrisImage" alt="QRIS pembayaran" />
+          <div>
+            <p class="muted">Order ID</p>
+            <strong id="orderIdText"></strong>
+            <p class="muted">Total bayar</p>
+            <strong class="big-price" id="payAmount"></strong>
+            <p class="muted">Status</p>
+            <span class="badge" id="paymentStatus">pending</span>
+            <a id="checkoutLink" target="_blank" rel="noreferrer">Buka checkout QRISPY</a>
+          </div>
+        </div>
+      </dialog>
+
+      <section class="robot-assistant" id="robotAssistant" aria-live="polite">
+        <div class="robot-panel" id="robotPanel">
+          <div class="robot-panel-head">
+            <div>
+              <p class="eyebrow">Assistant</p>
+              <h2>Izall Bot</h2>
+            </div>
+            <span class="bot-status">online</span>
+          </div>
+          <div class="bot-chat" id="botChat">
+            <p class="bot-bubble">Halo, aku bantu pilih paket dan cek alur pembayaran QRIS.</p>
+          </div>
+          <div class="bot-actions">
+            <button type="button" data-help="payment">Cara bayar</button>
+            <button type="button" data-help="package">Pilih paket</button>
+            <button type="button" data-help="status">Status order</button>
+          </div>
+        </div>
+        <button class="robot-toggle" id="robotToggle" type="button" aria-label="Buka asisten">
+          <span class="robot-face">
+            <span class="robot-eye"></span>
+            <span class="robot-eye"></span>
+          </span>
+        </button>
+      </section>
+    </main>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
